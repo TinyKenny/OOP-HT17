@@ -67,28 +67,22 @@ public class DogKennel {
 
 	private boolean handleCommand(String enteredCommand) {
 		switch (enteredCommand.toLowerCase()) {
-			case "reg":
 			case "registrera":
 			case "register new dog":
 				registerNewDog();
 				return true;
-			case "öka":
 			case "öka ålder":
 			case "increase age":
 				ageDog();
 				return true;
-			case "lis":
 			case "lista":
 			case "list dogs":
 				listDogs();
 				return true;
-			case "ta":
 			case "ta bort":
 			case "remove dog":
 				removeDog();
 				return true;
-			case "qq":
-			case "avs":
 			case "avsluta":
 			case "exit":
 				System.out.println("Avslutar...");
