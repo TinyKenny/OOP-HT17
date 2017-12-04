@@ -29,7 +29,7 @@ public class DogKennel {
 				return i;
 			}
 		}
-		System.out.println("Ingen hund med det angivna namnet hittades.");
+		System.out.println("error: Ingen hund med det angivna namnet hittades.");
 		return -1;
 	}
 	
@@ -52,7 +52,7 @@ public class DogKennel {
 			}
 		}
 		if (!foundAnyDog) {
-			System.out.println(String.format("Ingen hund med en svanslängd på, eller över, %f hittades.", minimumTailLength));
+			System.out.println(String.format("error: Ingen hund med en svanslängd på, eller över, %f hittades.", minimumTailLength));
 		}
 	}
 	
