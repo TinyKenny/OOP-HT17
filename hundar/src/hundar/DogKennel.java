@@ -1,31 +1,28 @@
 package hundar;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DogKennel {
 	
-	private Scanner scan = new Scanner(System.in);
+	private Input in = new Input();
 	private ArrayList<Dog> dogList = new ArrayList<>();
 	
 	private void registerNewDog() {
 		System.out.print("Ange hundens namn: ");
-		String dogName = scan.nextLine();
+		String dogName = in.readString();
 		System.out.print("Ange hundens ras: ");
-		String dogRace = scan.nextLine();
+		String dogRace = in.readString();
 		System.out.print("Ange hundens ålder: ");
-		int dogAge = scan.nextInt();
-		scan.nextLine();
+		int dogAge = in.readInt();
 		System.out.print("Ange hundens vikt (i kg): ");
-		int dogWeight = scan.nextInt();
-		scan.nextLine();
+		int dogWeight = in.readInt();
 		Dog dogToAdd = new Dog(dogName, dogRace, dogAge, dogWeight);
 		dogList.add(dogToAdd);
 		System.out.println("Du har lagt till: " + dogToAdd);
 	}
 	
 	private int findDogByName(){
-		String dogToFindName = scan.nextLine();
+		String dogToFindName = in.readString();
 		for (int i = 0; i < dogList.size(); i++) {
 			if (dogList.get(i).getName().equalsIgnoreCase(dogToFindName)) {
 				return i;
@@ -45,8 +42,7 @@ public class DogKennel {
 	
 	private void listDogs() {
 		System.out.print("Ange minimumsvanslängd för hundarna du vill visa: ");
-		float minimumTailLength = scan.nextFloat();
-		scan.nextLine();
+		float minimumTailLength = in.readFloat();
 		boolean foundAnyDog = false;
 		for (Dog dog: dogList) {
 			if (dog.getTailLength() >= minimumTailLength) {
@@ -63,7 +59,8 @@ public class DogKennel {
 		System.out.print("Ange namnet på hunden som ska tas bort: ");
 		int indexOfDogToRemove = findDogByName();
 		if (indexOfDogToRemove >= 0) {
-			dogList.remove(indexOfDogToRemove);
+			Dog removedDog = dogList.remove(indexOfDogToRemove);
+			System.out.println("Du tagit bort hunden: " + removedDog);
 		}
 	}
 
@@ -105,7 +102,7 @@ public class DogKennel {
 		boolean continueRunning;
 		do {
 			System.out.print("Skriv in ett kommando: ");
-			String command = scan.nextLine();
+			String command = in.readString();
 			continueRunning = handleCommand(command);
 		} while(continueRunning);
 	}
