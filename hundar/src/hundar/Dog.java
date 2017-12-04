@@ -15,11 +15,23 @@ public class Dog {
 	}
 	
 	public String getName() {
-		return this.name;
+		return name;
+	}
+	
+	public String getRace() {
+		return race;
 	}
 	
 	public void increaseAge() {
-		this.age++;
+		age++;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public int getWeight() {
+		return weight;
 	}
 	
 	public float getTailLength() {

@@ -64,7 +64,7 @@ public class DogKennel {
 		}
 	}
 
-	public boolean handleCommand(String enteredCommand) {
+	private boolean handleCommand(String enteredCommand) {
 		switch (enteredCommand.toLowerCase()) {
 			case "reg":
 			case "registrera":
