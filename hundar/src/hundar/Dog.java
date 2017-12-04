@@ -21,4 +21,17 @@ public class Dog {
 	public void increaseAge() {
 		this.age++;
 	}
+	
+	public float getTailLength() {
+		if (race.equalsIgnoreCase("tax") || race.equalsIgnoreCase("dachshund")) {
+			return 3.7f;
+		}
+		return (float) ((age*weight)/10.0f);
+	}
+	
+	
+	@Override
+	public String toString() {
+		return String.format("%s %s %d år %d kg svans=%f", name, race, age, weight, getTailLength());
+	}
 }
