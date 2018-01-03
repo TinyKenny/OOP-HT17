@@ -4,10 +4,10 @@ public class IdrottsSystem {
 	
 	private Input in = new Input();
 	private ArrayList<Event> eventList = new ArrayList<>();
+	private ArrayList<Participant> participantList = new ArrayList<>();
 	
 	private Event findEvent(String eventName) {
 		for (int i = 0; i < eventList.size(); i++) {
-			System.out.println(eventList.get(i).getEventName());
 			if (eventList.get(i).getEventName().equals(eventName)) {
 				return eventList.get(i);
 			}
@@ -21,19 +21,30 @@ public class IdrottsSystem {
 		return nameCapitalized;
 	}
 	
-	private void addEvent() {
-		String eventName;
-		while (true) {
-			System.out.print("Event name: ");
-			String enteredEventName = in.readTrimmedString();
-			if (enteredEventName.isEmpty()) {
+	private String readName(String promptText) {
+		while(true) {
+			System.out.print(promptText);
+			String enteredName = in.readTrimmedString();
+			if(enteredName.isEmpty()) {
 				System.out.println("Error: name can't be empty");
 				continue;
 			}
-			eventName = normalizeName(enteredEventName);
-			break;
+			return normalizeName(enteredName);
 		}
-		System.out.println(eventName);
+		
+	}
+	
+	private Participant findParticipantName(String participantName) {
+		for(int i = 0; i < participantList.size(); i++) {
+			if(participantList.get(i).getName().equals(participantName)) {
+				return participantList.get(i);
+			}
+		}
+		return null;
+	}
+	
+	private void addEvent() {
+		String eventName = readName("Event name: ");
 		if(findEvent(eventName) != null) {
 			System.out.println("Error: "+eventName+" has already been added.");
 			return;
@@ -50,9 +61,23 @@ public class IdrottsSystem {
 	}
 	
 	private void addParticipant() {
+		String firstName = readName("First name: ");
+		String lastName = readName("Last name: ");
+		String teamName = readName("Team: ");
+		
+		if(findParticipantName(firstName + " " + lastName) != null) {
+			System.out.println("Error: " + firstName + " " + lastName + " has already been added");
+			return;
+		}
+		
+		participantList.add(new Participant(firstName + " " + lastName, teamName));
+		
+		System.out.println(firstName + " " + lastName + " from " + teamName + " with number ???");
+	}
+
+	private void message() {
 		
 	}
-	
 	
 	private boolean handleCommand(String enteredCommand) {
 		switch (enteredCommand.toLowerCase()){
@@ -63,7 +88,7 @@ public class IdrottsSystem {
 			addEvent();
 			return true;
 		case "add participant":
-			System.out.println("LÄGG TILL DELTAGARE");
+			addParticipant();
 			return true;
 		case "remove participant":
 			System.out.println("TA BORT DELTAGARE");
@@ -74,10 +99,12 @@ public class IdrottsSystem {
 		case "participant":
 			System.out.println("RESULTATLISTA FÖR DELTAGARE");
 			return true;
-		case "grennamn":
+		case "[grennamn]":
 			System.out.println("RESULTATLISTA FÖR GREN");
 			return true;
 		case "message":
+			
+			message();
 			System.out.println("MEDDELANDE");
 			return true;
 		case "exit":
