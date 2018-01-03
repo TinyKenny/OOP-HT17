@@ -20,4 +20,8 @@ public class Input {
 		return scan.nextLine();
 	}
 	
+	public String readTrimmedString() {
+		return readString().trim();
+	}
+	
 }

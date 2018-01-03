@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class IdrottsSystem {
 	
 	private Input in = new Input();
@@ -8,24 +7,38 @@ public class IdrottsSystem {
 	
 	private Event findEvent(String eventName) {
 		for (int i = 0; i < eventList.size(); i++) {
-			if (eventList.get(i).getEventName().toLowerCase() == eventName.toLowerCase()) {
+			System.out.println(eventList.get(i).getEventName());
+			if (eventList.get(i).getEventName().equals(eventName)) {
 				return eventList.get(i);
 			}
 		}
 		return null;
 	}
 	
+	private String normalizeName(String name) {
+		String firstChar = name.substring(0, 1).toUpperCase();
+		String nameCapitalized = firstChar + name.substring(1).toLowerCase();
+		return nameCapitalized;
+	}
+	
 	private void addEvent() {
-		System.out.print("Event name: ");
-		String eventName = in.readString().trim();
-		while (eventName.isEmpty()) {
-			System.out.print("Error: name can't be empty!\nEvent name: ");
-			eventName = in.readString().trim();
+		String eventName;
+		while (true) {
+			System.out.print("Event name: ");
+			String enteredEventName = in.readTrimmedString();
+			if (enteredEventName.isEmpty()) {
+				System.out.println("Error: name can't be empty");
+				continue;
+			}
+			eventName = normalizeName(enteredEventName);
+			break;
 		}
+		System.out.println(eventName);
 		if(findEvent(eventName) != null) {
 			System.out.println("Error: "+eventName+" has already been added.");
 			return;
 		}
+		
 		System.out.print("Attempts allowed: ");
 		int attemptsAllowed = in.readInt();
 		while (attemptsAllowed < 1) {
@@ -33,9 +46,13 @@ public class IdrottsSystem {
 			attemptsAllowed = in.readInt();
 		}
 		eventList.add(new Event(eventName, attemptsAllowed));
-		System.out.println(eventName + "added.");
-		System.out.println("FIXA STORA/SMÅ BOKSTÄVER");
+		System.out.println(eventName + " added.");
 	}
+	
+	private void addParticipant() {
+		
+	}
+	
 	
 	private boolean handleCommand(String enteredCommand) {
 		switch (enteredCommand.toLowerCase()){
