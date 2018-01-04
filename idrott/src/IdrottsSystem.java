@@ -2,9 +2,13 @@ import java.util.ArrayList;
 
 public class IdrottsSystem {
 	
+	private static final int MESSAGE_BOX_WIDTH = 60;
+	private static final int MESSAGE_MAX_LENGTH = 56;
+	
 	private Input in = new Input();
 	private ArrayList<Event> eventList = new ArrayList<>();
 	private ArrayList<Participant> participantList = new ArrayList<>();
+	private int nextParticipantNumber = 100;
 	
 	private Event findEvent(String eventName) {
 		for (int i = 0; i < eventList.size(); i++) {
@@ -31,12 +35,20 @@ public class IdrottsSystem {
 			}
 			return normalizeName(enteredName);
 		}
-		
 	}
 	
 	private Participant findParticipantName(String participantName) {
-		for(int i = 0; i < participantList.size(); i++) {
+		for (int i = 0; i < participantList.size(); i++) {
 			if(participantList.get(i).getName().equals(participantName)) {
+				return participantList.get(i);
+			}
+		}
+		return null;
+	}
+	
+	private Participant findParticipantNumber(int participantNumber) {
+		for (int i = 0; i < participantList.size(); i++) {
+			if(participantList.get(i).getParticipantNumber() == participantNumber) {
 				return participantList.get(i);
 			}
 		}
@@ -70,13 +82,57 @@ public class IdrottsSystem {
 			return;
 		}
 		
-		participantList.add(new Participant(firstName + " " + lastName, teamName));
+		participantList.add(new Participant(firstName + " " + lastName, teamName, nextParticipantNumber));
 		
-		System.out.println(firstName + " " + lastName + " from " + teamName + " with number ???");
+		System.out.println(firstName + " " + lastName + " from " + teamName + " with number " + nextParticipantNumber);
+		nextParticipantNumber++;
+	}
+	
+	private void addResult() {
+		System.out.print("Number: ");
+		int participantNumber = in.readInt();
+		Participant participantToAddResult = findParticipantNumber(participantNumber);
+		if (participantToAddResult == null) {
+			System.out.println("Error: no participant with number "+participantNumber+" found!");
+			return;
+		}
+		System.out.print("Event: ");
+		String eventName = in.readTrimmedString();
+		String nomalizedEventName = normalizeName(eventName);
+		Event eventForResults = findEvent(nomalizedEventName);
+		if (eventForResults == null) {
+			System.out.println("Error: no event called \"" + eventName + "\" found!");
+			return;
+		}
+		
+		//continue working here: take result value, call the addResult for the participant.
+		
+		
+	}
+	
+	private String prepareMessage(String message) {
+		if (message.length() > MESSAGE_MAX_LENGTH) {
+			message = message.substring(0, MESSAGE_MAX_LENGTH);
+		}
+		return message.toUpperCase();
 	}
 
-	private void message() {
+	private void printMessage(String message) {
 		
+		String preparedMessage = prepareMessage(message);
+		
+		System.out.println(new String(new char[MESSAGE_BOX_WIDTH]).replace("\0", "#"));
+		System.out.print("# ");
+		System.out.print(new String(new char[MESSAGE_MAX_LENGTH]).replace("\0", " "));
+		System.out.println(" #");
+		System.out.print("# ");
+		System.out.print(preparedMessage);
+		System.out.print(new String(new char[MESSAGE_MAX_LENGTH-preparedMessage.length()]).replace("\0", " "));
+		System.out.println(" #");
+		System.out.print("# ");
+		System.out.print(new String(new char[MESSAGE_MAX_LENGTH]).replace("\0", " "));
+		System.out.println(" #");
+		System.out.println(new String(new char[MESSAGE_BOX_WIDTH]).replace("\0", "#"));
 	}
 	
 	private boolean handleCommand(String enteredCommand) {
@@ -102,15 +158,17 @@ public class IdrottsSystem {
 		case "[grennamn]":
 			System.out.println("RESULTATLISTA FÖR GREN");
 			return true;
-		case "message":
-			
-			message();
-			System.out.println("MEDDELANDE");
-			return true;
 		case "exit":
 			System.out.println("Exiting.");
 			return false;
 		default:
+			if (enteredCommand.toLowerCase().startsWith("message ")) {
+				printMessage(enteredCommand.substring("message ".length()));
+				return true;
+			}
+			
+			//EVENT SEARCH HERE!!!!!!
+			
 			System.out.println("Error: unknown command \"" + enteredCommand + "\"");
 			return true;
 		}
@@ -119,7 +177,7 @@ public class IdrottsSystem {
 	public void run() {
 		boolean continueRunning;
 		do {
-			System.out.println("MAKE THIS ENGLISH! GRENNAMN!!!!");
+			System.out.println("GRENNAMN!!!!");
 			System.out.print("Command> ");
 			String command = in.readString().toLowerCase();
 			continueRunning = handleCommand(command);
