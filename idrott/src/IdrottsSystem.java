@@ -11,6 +11,7 @@ public class IdrottsSystem {
 	private int nextParticipantNumber = 100;
 	
 	private Event findEvent(String eventName) {
+		eventName = normalizeName(eventName);
 		for (int i = 0; i < eventList.size(); i++) {
 			if (eventList.get(i).getEventName().equals(eventName)) {
 				return eventList.get(i);
@@ -46,19 +47,22 @@ public class IdrottsSystem {
 		return null;
 	}
 	
-	private Participant findParticipantNumber(int participantNumber) {
+	private Participant findParticipantNumber() {
+		System.out.print("Number: ");
+		int participantNumber = in.readInt();
 		for (int i = 0; i < participantList.size(); i++) {
 			if(participantList.get(i).getParticipantNumber() == participantNumber) {
 				return participantList.get(i);
 			}
 		}
+		System.out.println("Error: no participant with number " + participantNumber + " found!");
 		return null;
 	}
 	
 	private void addEvent() {
 		String eventName = readName("Event name: ");
 		if(findEvent(eventName) != null) {
-			System.out.println("Error: "+eventName+" has already been added.");
+			System.out.println("Error: " + eventName + " has already been added.");
 			return;
 		}
 		
@@ -82,32 +86,34 @@ public class IdrottsSystem {
 			return;
 		}
 		
-		participantList.add(new Participant(firstName + " " + lastName, teamName, nextParticipantNumber));
+		participantList.add(new Participant(firstName, lastName, teamName, nextParticipantNumber));
 		
 		System.out.println(firstName + " " + lastName + " from " + teamName + " with number " + nextParticipantNumber);
 		nextParticipantNumber++;
 	}
 	
 	private void addResult() {
-		System.out.print("Number: ");
-		int participantNumber = in.readInt();
-		Participant participantToAddResult = findParticipantNumber(participantNumber);
+		Participant participantToAddResult = findParticipantNumber();
 		if (participantToAddResult == null) {
-			System.out.println("Error: no participant with number "+participantNumber+" found!");
 			return;
 		}
 		System.out.print("Event: ");
 		String eventName = in.readTrimmedString();
-		String nomalizedEventName = normalizeName(eventName);
-		Event eventForResults = findEvent(nomalizedEventName);
+		String normalizedEventName = normalizeName(eventName);
+		Event eventForResults = findEvent(normalizedEventName);
 		if (eventForResults == null) {
 			System.out.println("Error: no event called \"" + eventName + "\" found!");
 			return;
 		}
-		
-		//continue working here: take result value, call the addResult for the participant.
-		
-		
+		participantToAddResult.addResult(in, eventForResults);
+	}
+	
+	private void printParticipantResults() {
+		Participant participantToPrintResults = findParticipantNumber();
+		if (participantToPrintResults == null) {
+			return;
+		}
+		participantToPrintResults.printResults();
 	}
 	
 	private String prepareMessage(String message) {
@@ -150,10 +156,10 @@ public class IdrottsSystem {
 			System.out.println("TA BORT DELTAGARE");
 			return true;
 		case "add result":
-			System.out.println("REGISTRERA RESULTAT");
+			addResult();
 			return true;
 		case "participant":
-			System.out.println("RESULTATLISTA FÖR DELTAGARE");
+			printParticipantResults();
 			return true;
 		case "[grennamn]":
 			System.out.println("RESULTATLISTA FÖR GREN");
@@ -167,7 +173,26 @@ public class IdrottsSystem {
 				return true;
 			}
 			
-			//EVENT SEARCH HERE!!!!!!
+			if (enteredCommand.equalsIgnoreCase("test")) {
+				System.out.println("aaa".compareTo("aaaa"));
+				System.out.println("Abc Def".compareTo("Abcd Ef"));
+				System.out.println("Abc Def".compareTo("Abc Defg"));
+				System.out.println("Abc Def".compareTo("Abcd Efg"));
+				System.out.println("Abcd Ef".compareTo("Abc Defg"));
+				System.out.println("Abcd Ef".compareTo("Abcd Efg"));
+				System.out.println("Abc Defg".compareTo("Abcd Efg"));
+				String anArray;
+				anArray = "abc def".split(" ")[0];
+				System.out.println(anArray);
+			}
+			
+			if (!enteredCommand.isEmpty()) {
+				Event eventForResults = findEvent(enteredCommand);
+				if (eventForResults != null) {
+					eventForResults.printResults();
+					return true;
+				}
+			}
 			
 			System.out.println("Error: unknown command \"" + enteredCommand + "\"");
 			return true;
