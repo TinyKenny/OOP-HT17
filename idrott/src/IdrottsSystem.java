@@ -1,3 +1,4 @@
+//Jonathan Rawet (jora0374), Viktor Fagerström Eriksson (vier5348), Hanna Severien (hase8853)
 import java.util.ArrayList;
 
 public class IdrottsSystem {
@@ -38,15 +39,6 @@ public class IdrottsSystem {
 		}
 	}
 	
-	private Participant findParticipantName(String participantName) {
-		for (int i = 0; i < participantList.size(); i++) {
-			if(participantList.get(i).getName().equals(participantName)) {
-				return participantList.get(i);
-			}
-		}
-		return null;
-	}
-	
 	private Participant findParticipantNumber() {
 		System.out.print("Number: ");
 		int participantNumber = in.readInt();
@@ -65,7 +57,6 @@ public class IdrottsSystem {
 			System.out.println("Error: " + eventName + " has already been added.");
 			return;
 		}
-		
 		System.out.print("Attempts allowed: ");
 		int attemptsAllowed = in.readInt();
 		while (attemptsAllowed < 1) {
@@ -81,14 +72,9 @@ public class IdrottsSystem {
 		String lastName = readName("Last name: ");
 		String teamName = readName("Team: ");
 		
-		if(findParticipantName(firstName + " " + lastName) != null) {
-			System.out.println("Error: " + firstName + " " + lastName + " has already been added");
-			return;
-		}
-		
 		participantList.add(new Participant(firstName + " " + lastName, teamName, nextParticipantNumber));
 		
-		System.out.println(firstName + " " + lastName + " from " + teamName + " with number " + nextParticipantNumber);
+		System.out.println(firstName + " " + lastName + " from " + teamName + " with number " + nextParticipantNumber + " added");
 		nextParticipantNumber++;
 	}
 	
@@ -98,7 +84,9 @@ public class IdrottsSystem {
 			String participantToRemoveName = participantToRemove.getName();
 			String participantToRemoveTeam = participantToRemove.getTeamName();
 			int participantToRemoveNumber = participantToRemove.getParticipantNumber();
-			System.out.println(String.format("%s from %s with number %d removed\n", participantToRemoveName, participantToRemoveTeam, participantToRemoveNumber));
+			participantToRemove.prepareForRemoval();
+			participantList.remove(participantToRemove);
+			System.out.printf("%s from %s with number %d removed\n", participantToRemoveName, participantToRemoveTeam, participantToRemoveNumber);
 		}
 	}
 	
@@ -134,7 +122,6 @@ public class IdrottsSystem {
 	}
 
 	private void printMessage(String message) {
-		
 		String preparedMessage = prepareMessage(message);
 		
 		System.out.println(new String(new char[MESSAGE_BOX_WIDTH]).replace("\0", "#"));
@@ -176,7 +163,6 @@ public class IdrottsSystem {
 				printMessage(enteredCommand.substring("message ".length()));
 				return true;
 			}
-			
 			if (!enteredCommand.isEmpty()) {
 				Event eventForResults = findEvent(enteredCommand);
 				if (eventForResults != null) {
@@ -184,7 +170,6 @@ public class IdrottsSystem {
 					return true;
 				}
 			}
-			
 			System.out.println("Error: unknown command \"" + enteredCommand + "\"");
 			return true;
 		}
@@ -200,8 +185,8 @@ public class IdrottsSystem {
 	}
 	
 	public static void main(String[] args) {
-		IdrottsSystem idrott1 = new IdrottsSystem();
-		idrott1.run();
+		IdrottsSystem idrott = new IdrottsSystem();
+		idrott.run();
 	}
 	
 }

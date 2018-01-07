@@ -1,4 +1,4 @@
-
+//Jonathan Rawet (jora0374), Viktor Fagerström Eriksson (vier5348), Hanna Severien (hase8853)
 public class Result {
 	
 	private Participant performingParticipant;
@@ -11,6 +11,11 @@ public class Result {
 		this.relatedEvent = relatedEvent;
 		attemptResults = new float[relatedEvent.getAttemptsAllowed()];
 		relatedEvent.addResult(this);
+	}
+	
+	public void prepareForRemoval() {
+		performingParticipant = null;
+		relatedEvent.removeResult(this);
 	}
 	
 	public boolean isForEvent(Event eventToCheck) {
@@ -41,10 +46,6 @@ public class Result {
 		}
 	}
 	
-	public String getResultString() {
-		return "NOT IMPLEMENTED";
-	}
-	
 	public float getGreatestAttempt() {
 		float greatestAttempt = 0.0f;
 		for (float attempt: attemptResults) {
@@ -59,12 +60,13 @@ public class Result {
 		return performingParticipant.getName();
 	}
 	
+	public String getParticipantTeam() {
+		return performingParticipant.getTeamName();
+	}
+	
 	public boolean compareTo(Result otherResult) {
-		if (getGreatestAttempt() < otherResult.getGreatestAttempt()) {
-			return true;
-		}
-		if (getGreatestAttempt() > otherResult.getGreatestAttempt()) {
-			return false;
+		if (getGreatestAttempt() != otherResult.getGreatestAttempt()) {
+			return getGreatestAttempt() > otherResult.getGreatestAttempt();
 		}
 		return compareParticipantNames(otherResult);
 	}

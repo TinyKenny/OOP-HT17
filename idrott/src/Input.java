@@ -1,3 +1,4 @@
+//Jonathan Rawet (jora0374), Viktor Fagerström Eriksson (vier5348), Hanna Severien (hase8853)
 import java.util.Scanner;
 
 public class Input {

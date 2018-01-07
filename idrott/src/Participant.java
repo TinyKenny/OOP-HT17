@@ -1,3 +1,4 @@
+//Jonathan Rawet (jora0374), Viktor Fagerström Eriksson (vier5348), Hanna Severien (hase8853)
 import java.util.ArrayList;
 
 public class Participant {
@@ -11,6 +12,12 @@ public class Participant {
 		this.name = name;
 		this.teamName = teamName;
 		this.participantNumber = participantNumber;
+	}
+	
+	public void prepareForRemoval() {
+		for (int i = 0; i < results.size(); i++) {
+			results.get(i).prepareForRemoval();
+		}
 	}
 	
 	public String getName() {
@@ -31,12 +38,10 @@ public class Participant {
 			resultObject = new Result(this, eventForResults);
 			results.add(resultObject);
 		}
-		
 		if (!resultObject.hasAttemptsLeft()) {
-			System.out.println("Error: " + name + " from " + teamName + " has already made " + eventForResults.getAttemptsAllowed() + " attempts in " + eventForResults.getEventName() + ".");;
+			System.out.println("Error: " + name + " from " + teamName + " has already made " + eventForResults.getAttemptsAllowed() + " attempts in " + eventForResults.getEventName() + ".");
 			return;
 		}
-		
 		float attemptResult;
 		do {
 			System.out.print("Results for " + name + " from " + teamName + " in " + eventForResults.getEventName() + ": ");
