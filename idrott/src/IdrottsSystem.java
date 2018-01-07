@@ -86,10 +86,20 @@ public class IdrottsSystem {
 			return;
 		}
 		
-		participantList.add(new Participant(firstName, lastName, teamName, nextParticipantNumber));
+		participantList.add(new Participant(firstName + " " + lastName, teamName, nextParticipantNumber));
 		
 		System.out.println(firstName + " " + lastName + " from " + teamName + " with number " + nextParticipantNumber);
 		nextParticipantNumber++;
+	}
+	
+	private void removeParticipant() {
+		Participant participantToRemove = findParticipantNumber();
+		if (participantToRemove != null) {
+			String participantToRemoveName = participantToRemove.getName();
+			String participantToRemoveTeam = participantToRemove.getTeamName();
+			int participantToRemoveNumber = participantToRemove.getParticipantNumber();
+			System.out.println(String.format("%s from %s with number %d removed\n", participantToRemoveName, participantToRemoveTeam, participantToRemoveNumber));
+		}
 	}
 	
 	private void addResult() {
@@ -143,9 +153,6 @@ public class IdrottsSystem {
 	
 	private boolean handleCommand(String enteredCommand) {
 		switch (enteredCommand.toLowerCase()){
-		case "help":
-			System.out.println("HELP");
-			return true;
 		case "add event":
 			addEvent();
 			return true;
@@ -153,16 +160,13 @@ public class IdrottsSystem {
 			addParticipant();
 			return true;
 		case "remove participant":
-			System.out.println("TA BORT DELTAGARE");
+			removeParticipant();
 			return true;
 		case "add result":
 			addResult();
 			return true;
 		case "participant":
 			printParticipantResults();
-			return true;
-		case "[grennamn]":
-			System.out.println("RESULTATLISTA FÖR GREN");
 			return true;
 		case "exit":
 			System.out.println("Exiting.");
@@ -171,19 +175,6 @@ public class IdrottsSystem {
 			if (enteredCommand.toLowerCase().startsWith("message ")) {
 				printMessage(enteredCommand.substring("message ".length()));
 				return true;
-			}
-			
-			if (enteredCommand.equalsIgnoreCase("test")) {
-				System.out.println("aaa".compareTo("aaaa"));
-				System.out.println("Abc Def".compareTo("Abcd Ef"));
-				System.out.println("Abc Def".compareTo("Abc Defg"));
-				System.out.println("Abc Def".compareTo("Abcd Efg"));
-				System.out.println("Abcd Ef".compareTo("Abc Defg"));
-				System.out.println("Abcd Ef".compareTo("Abcd Efg"));
-				System.out.println("Abc Defg".compareTo("Abcd Efg"));
-				String anArray;
-				anArray = "abc def".split(" ")[0];
-				System.out.println(anArray);
 			}
 			
 			if (!enteredCommand.isEmpty()) {
@@ -202,7 +193,6 @@ public class IdrottsSystem {
 	public void run() {
 		boolean continueRunning;
 		do {
-			System.out.println("GRENNAMN!!!!");
 			System.out.print("Command> ");
 			String command = in.readString().toLowerCase();
 			continueRunning = handleCommand(command);

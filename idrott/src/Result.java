@@ -59,33 +59,28 @@ public class Result {
 		return performingParticipant.getName();
 	}
 	
-	public String getParticipantFirstName() {
-		return performingParticipant.getFirstName();
-	}
-	
-	public String getParticipantLastName() {
-		return performingParticipant.getLastName();
-	}
-	
-	public int compareTo(Result otherResult) {
+	public boolean compareTo(Result otherResult) {
 		if (getGreatestAttempt() < otherResult.getGreatestAttempt()) {
-			return -1;
+			return true;
 		}
 		if (getGreatestAttempt() > otherResult.getGreatestAttempt()) {
-			return 1;
+			return false;
 		}
-		if (getGreatestAttempt() == otherResult.getGreatestAttempt()) {
-			return -getParticipantName().replaceAll(" ", "").compareToIgnoreCase(otherResult.getParticipantName().replaceAll(" ", ""));
-		}
-		return 0;
+		return compareParticipantNames(otherResult);
 	}
 	
-	private int compareParticipantFullNames(Result otherResult) {
-		//Compare length of first names
-		//Compare first names char by char
-		//Compare length of last names
-		//compare last names char by char
-		return 0;
+	private boolean compareParticipantNames(Result otherResult) {
+		String participantName = getParticipantName();
+		int participantNameLength = participantName.length();
+		String otherParticipantName = otherResult.getParticipantName();
+		int otherParticipantNameLength = otherParticipantName.length();
+		
+		for (int i = 0; i < participantNameLength && i < otherParticipantNameLength; i++) {
+			if (participantName.charAt(i) != otherParticipantName.charAt(i)) {
+				return participantName.charAt(i) < otherParticipantName.charAt(i);
+			}
+		}
+		return participantNameLength < otherParticipantNameLength;
 	}
 	
 }
