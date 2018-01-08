@@ -47,7 +47,7 @@ public class Event {
 				placement = i + 1;
 			}
 			previousResultValue = currentResultValue;
-			System.out.printf("%d %f %s %s\n", placement, currentResultValue, participantName, participantTeam);
+			System.out.printf("%d %s %s %s\n", placement, String.valueOf(currentResultValue), participantName, participantTeam);
 		}
 	}
 	
