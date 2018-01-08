@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="Event" project="idrott" file="/idrott/src/Event.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="951" y="331"/>    
+    <position height="-1" width="-1" x="815" y="204"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="IdrottsSystem" project="idrott" file="/idrott/src/IdrottsSystem.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="591" y="321"/>    
+    <position height="-1" width="-1" x="478" y="239"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="Input" project="idrott" file="/idrott/src/Input.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="229" y="404"/>    
+    <position height="-1" width="-1" x="133" y="225"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="Result" project="idrott" file="/idrott/src/Result.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="713" y="908"/>    
+    <position height="-1" width="-1" x="820" y="560"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="Participant" project="idrott" file="/idrott/src/Participant.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="306" y="690"/>    
+    <position height="-1" width="-1" x="142" y="491"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -47,67 +47,92 @@
     </display>  
   </class>  
   <association id="6">    
+    <bendpoint x="1015" y="204"/>    
+    <bendpoint x="1016" y="557"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="7" name="results">        
+        <position height="18" width="41" x="902" y="372"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="107" y="-348"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="9">    
+    <bendpoint x="645" y="222"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="7" name="eventList"/>      
-      <multiplicity id="8" minimum="0" maximum="2147483647"/>    
+      <attribute id="10" name="eventList">        
+        <position height="0" width="0" x="-136" y="-127"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-136" y="-127"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="9">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="10" name="performingParticipant"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="12">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="13" name="in"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+      <attribute id="13" name="in">        
+        <position height="0" width="0" x="-96" y="-179"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-96" y="-179"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="15">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="16" name="participantList">        
-        <position height="18" width="75" x="432" y="534"/>      
+    <bendpoint x="159" y="654"/>    
+    <bendpoint x="621" y="661"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="16" name="results">        
+        <position height="18" width="41" x="628" y="504"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="2147483647"/>    
+      <multiplicity id="17" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="107" y="-348"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="18">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="19" name="results">        
-        <position height="18" width="41" x="795" y="720"/>      
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="19" name="performingParticipant">        
+        <position height="0" width="0" x="-164" y="-199"/>      
       </attribute>      
-      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-164" y="-199"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="21">    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="22" name="relatedEvent">        
-        <position height="18" width="68" x="797" y="472"/>      
+        <position height="18" width="68" x="661" y="345"/>      
       </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
+      <multiplicity id="23" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-136" y="-127"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="24">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="25" name="results">        
-        <position height="18" width="41" x="521" y="852"/>      
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="25" name="participantList">        
+        <position height="18" width="75" x="268" y="335"/>      
       </attribute>      
-      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
+      <multiplicity id="26" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-164" y="-199"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
