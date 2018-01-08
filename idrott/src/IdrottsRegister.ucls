@@ -47,17 +47,15 @@
     </display>  
   </class>  
   <association id="6">    
-    <bendpoint x="1015" y="204"/>    
-    <bendpoint x="1016" y="557"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="7" name="results">        
-        <position height="18" width="41" x="902" y="372"/>      
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="7" name="relatedEvent">        
+        <position height="18" width="68" x="738" y="363"/>      
       </attribute>      
-      <multiplicity id="8" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="107" y="-348"/>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-136" y="-127"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="9">    
@@ -75,64 +73,66 @@
   </association>  
   <association id="12">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="13" name="in">        
+      <attribute id="13" name="participantList">        
+        <position height="18" width="75" x="268" y="335"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-164" y="-199"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="15">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="16" name="performingParticipant">        
+        <position height="0" width="0" x="-164" y="-199"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-164" y="-199"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="19" name="in">        
         <position height="0" width="0" x="-96" y="-179"/>      
       </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
+      <multiplicity id="20" minimum="0" maximum="1">        
         <position height="0" width="0" x="-96" y="-179"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
-    <bendpoint x="159" y="654"/>    
-    <bendpoint x="621" y="661"/>    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="results">        
-        <position height="18" width="41" x="628" y="504"/>      
+  <association id="21">    
+    <bendpoint x="1015" y="204"/>    
+    <bendpoint x="1016" y="557"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="22" name="results">        
+        <position height="18" width="41" x="965" y="370"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="2147483647">        
+      <multiplicity id="23" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="107" y="-348"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="18">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="19" name="performingParticipant">        
-        <position height="0" width="0" x="-164" y="-199"/>      
-      </attribute>      
-      <multiplicity id="20" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-164" y="-199"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="22" name="relatedEvent">        
-        <position height="18" width="68" x="661" y="345"/>      
-      </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-136" y="-127"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="24">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="25" name="participantList">        
-        <position height="18" width="75" x="268" y="335"/>      
+    <bendpoint x="159" y="654"/>    
+    <bendpoint x="621" y="661"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="25" name="results">        
+        <position height="18" width="41" x="405" y="637"/>      
       </attribute>      
       <multiplicity id="26" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-164" y="-199"/>      
+        <position height="0" width="0" x="107" y="-348"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
